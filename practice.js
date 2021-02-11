@@ -265,6 +265,23 @@ function findPrevious(list, item) {
   return currNode.value;
 }
 
+function findLast(list) {
+  if (!list.head) {
+    console.log('list is empty');
+    return;
+  }
+
+  //start at head
+  let currNode = list.head;
+  while (currNode.next !== null) {
+    currNode = currNode.next;
+  }
+
+  return currNode.value;
+}
+
+console.log(findLast(createLL())); // 'Starbuck'
+
 console.log(isEmpty(createLL()));
 
 console.log(findPrevious(createLL(), 'Boomer')); // 'Apollo'
