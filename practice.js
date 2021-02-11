@@ -187,6 +187,96 @@ function main() {
 
 main();
 
+// PROBLEM 3
+
+function createLL() {
+  let SLL = new LinkedList();
+  let insertion = ['Apollo', 'Boomer', 'Helo', 'Husker', 'Starbuck'];
+  insertion.map((item) => SLL.insertLast(item));
+  return SLL;
+}
+
+function display(list) {
+  //if no items, respond with nothing to print
+  if (list.head === null) {
+    console.log('List is empty');
+  } else {
+    //move through the list until you hit a node that points to null, signifying last node
+    let tempNode = list.head;
+    while (tempNode) {
+      console.log(tempNode.value);
+      tempNode = tempNode.next;
+    }
+  }
+}
+
+function size(list) {
+  if (!list.head) {
+    console.log('list is empty');
+    return;
+  }
+
+  //else, move through list, iterating a count variable. When count === index, take current Node value and use for insertBefore
+  let count = 1;
+  //start at head
+  let currNode = list.head;
+  while (currNode.next !== null) {
+    currNode = currNode.next;
+    count++;
+  }
+  console.log(`This list is ${count} items long`);
+  return count;
+}
+
+function isEmpty(list) {
+  if (!list.head) {
+    return true;
+  }
+  return false;
+}
+
+function findPrevious(list, item) {
+  // if no head, then list is empty
+  if (!list.head) {
+    console.log('This list is empty');
+    return null;
+  }
+  // if list head is the item you want the before of, can't do it
+  if (list.head.value === item) {
+    console.log('Cannot return the item before the first item in the list');
+    return null;
+  }
+  //start at list head
+  let currNode = list.head;
+
+  //check the value of current node for the item
+  while (currNode.next !== null && currNode.next.value !== item) {
+    //move to next node
+    currNode = currNode.next;
+  }
+  // return null if reach end without finding item
+  if (currNode.next === null) {
+    console.log('Could not find input item');
+    return null;
+  }
+
+  //sweet, found it
+
+  return currNode.value;
+}
+
+console.log(isEmpty(createLL()));
+
+console.log(findPrevious(createLL(), 'Boomer')); // 'Apollo'
+console.log(findPrevious(createLL(), 'Apollo')); // 'Cannot return the item before the first item in the list'
+console.log(findPrevious(createLL(), 'Jake')); // 'Input item not in list'
+
+size(createLL()); // 5
+
+display(createLL()); // 'Apollo', 'Boomer', 'Helo', 'Husker', 'Starbuck'
+
+/* ---------------------------- */
+
 // function insertBeforeTest() {
 //   let SLL = new LinkedList();
 //   let insertion = ['Apollo', 'Boomer'];
